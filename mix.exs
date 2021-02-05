@@ -1,4 +1,4 @@
-defmodule MergeATSAPI.Mixfile do
+defmodule MergeATSClient.Mixfile do
   use Mix.Project
 
   def project do

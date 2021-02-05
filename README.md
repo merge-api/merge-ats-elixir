@@ -1,4 +1,4 @@
-# MergeATSAPI
+# MergeATSClient
 
 The unified API for building rich integrations with multiple Applicant Tracking System platforms.
 
