@@ -17,6 +17,7 @@ defmodule MergeATSClient.Api.Applications do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - opts (KeywordList): [optional] Optional parameters
     - :candidate_id (String.t): If provided, will only return applications for this candidate.
@@ -37,8 +38,8 @@ defmodule MergeATSClient.Api.Applications do
   {:ok, %MergeATSClient.Model.PaginatedApplicationList{}} on success
   {:error, info} on failure
   """
-  @spec applications_list(Tesla.Env.client, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedApplicationList.t} | {:error, Tesla.Env.t}
-  def applications_list(connection, x_account_token, opts \\ []) do
+  @spec applications_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedApplicationList.t} | {:error, Tesla.Env.t}
+  def applications_list(connection, authorization, x_account_token, opts \\ []) do
     optional_params = %{
       :"candidate_id" => :query,
       :"created_after" => :query,
@@ -57,6 +58,7 @@ defmodule MergeATSClient.Api.Applications do
     %{}
     |> method(:get)
     |> url("/applications")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
@@ -72,6 +74,7 @@ defmodule MergeATSClient.Api.Applications do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - id (String.t): 
   - opts (KeywordList): [optional] Optional parameters
@@ -81,14 +84,15 @@ defmodule MergeATSClient.Api.Applications do
   {:ok, %MergeATSClient.Model.Application{}} on success
   {:error, info} on failure
   """
-  @spec applications_retrieve(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Application.t} | {:error, Tesla.Env.t}
-  def applications_retrieve(connection, x_account_token, id, opts \\ []) do
+  @spec applications_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Application.t} | {:error, Tesla.Env.t}
+  def applications_retrieve(connection, authorization, x_account_token, id, opts \\ []) do
     optional_params = %{
       :"expand" => :query
     }
     %{}
     |> method(:get)
     |> url("/applications/#{id}")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])

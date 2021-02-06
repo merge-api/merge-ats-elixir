@@ -17,6 +17,7 @@ defmodule MergeATSClient.Api.Offices do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - opts (KeywordList): [optional] Optional parameters
     - :created_after (DateTime.t): If provided, will only return objects created after this datetime.
@@ -31,8 +32,8 @@ defmodule MergeATSClient.Api.Offices do
   {:ok, %MergeATSClient.Model.PaginatedOfficeList{}} on success
   {:error, info} on failure
   """
-  @spec offices_list(Tesla.Env.client, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedOfficeList.t} | {:error, Tesla.Env.t}
-  def offices_list(connection, x_account_token, opts \\ []) do
+  @spec offices_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedOfficeList.t} | {:error, Tesla.Env.t}
+  def offices_list(connection, authorization, x_account_token, opts \\ []) do
     optional_params = %{
       :"created_after" => :query,
       :"created_before" => :query,
@@ -45,6 +46,7 @@ defmodule MergeATSClient.Api.Offices do
     %{}
     |> method(:get)
     |> url("/offices")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
@@ -60,6 +62,7 @@ defmodule MergeATSClient.Api.Offices do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - id (String.t): 
   - opts (KeywordList): [optional] Optional parameters
@@ -68,11 +71,12 @@ defmodule MergeATSClient.Api.Offices do
   {:ok, %MergeATSClient.Model.Office{}} on success
   {:error, info} on failure
   """
-  @spec offices_retrieve(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Office.t} | {:error, Tesla.Env.t}
-  def offices_retrieve(connection, x_account_token, id, _opts \\ []) do
+  @spec offices_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Office.t} | {:error, Tesla.Env.t}
+  def offices_retrieve(connection, authorization, x_account_token, id, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/offices/#{id}")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

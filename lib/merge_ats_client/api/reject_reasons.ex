@@ -17,6 +17,7 @@ defmodule MergeATSClient.Api.RejectReasons do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - opts (KeywordList): [optional] Optional parameters
     - :created_after (DateTime.t): If provided, will only return objects created after this datetime.
@@ -31,8 +32,8 @@ defmodule MergeATSClient.Api.RejectReasons do
   {:ok, %MergeATSClient.Model.PaginatedRejectReasonList{}} on success
   {:error, info} on failure
   """
-  @spec reject_reasons_list(Tesla.Env.client, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedRejectReasonList.t} | {:error, Tesla.Env.t}
-  def reject_reasons_list(connection, x_account_token, opts \\ []) do
+  @spec reject_reasons_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedRejectReasonList.t} | {:error, Tesla.Env.t}
+  def reject_reasons_list(connection, authorization, x_account_token, opts \\ []) do
     optional_params = %{
       :"created_after" => :query,
       :"created_before" => :query,
@@ -45,6 +46,7 @@ defmodule MergeATSClient.Api.RejectReasons do
     %{}
     |> method(:get)
     |> url("/reject-reasons")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
@@ -60,6 +62,7 @@ defmodule MergeATSClient.Api.RejectReasons do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - id (String.t): 
   - opts (KeywordList): [optional] Optional parameters
@@ -68,11 +71,12 @@ defmodule MergeATSClient.Api.RejectReasons do
   {:ok, %MergeATSClient.Model.RejectReason{}} on success
   {:error, info} on failure
   """
-  @spec reject_reasons_retrieve(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.RejectReason.t} | {:error, Tesla.Env.t}
-  def reject_reasons_retrieve(connection, x_account_token, id, _opts \\ []) do
+  @spec reject_reasons_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.RejectReason.t} | {:error, Tesla.Env.t}
+  def reject_reasons_retrieve(connection, authorization, x_account_token, id, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/reject-reasons/#{id}")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

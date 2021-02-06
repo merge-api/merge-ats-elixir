@@ -17,6 +17,7 @@ defmodule MergeATSClient.Api.Interviews do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - opts (KeywordList): [optional] Optional parameters
     - :application_id (String.t): If provided, will only return interviews for this application.
@@ -34,8 +35,8 @@ defmodule MergeATSClient.Api.Interviews do
   {:ok, %MergeATSClient.Model.PaginatedScheduledInterviewList{}} on success
   {:error, info} on failure
   """
-  @spec interviews_list(Tesla.Env.client, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedScheduledInterviewList.t} | {:error, Tesla.Env.t}
-  def interviews_list(connection, x_account_token, opts \\ []) do
+  @spec interviews_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedScheduledInterviewList.t} | {:error, Tesla.Env.t}
+  def interviews_list(connection, authorization, x_account_token, opts \\ []) do
     optional_params = %{
       :"application_id" => :query,
       :"created_after" => :query,
@@ -51,6 +52,7 @@ defmodule MergeATSClient.Api.Interviews do
     %{}
     |> method(:get)
     |> url("/interviews")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
@@ -66,6 +68,7 @@ defmodule MergeATSClient.Api.Interviews do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - id (String.t): 
   - opts (KeywordList): [optional] Optional parameters
@@ -75,14 +78,15 @@ defmodule MergeATSClient.Api.Interviews do
   {:ok, %MergeATSClient.Model.ScheduledInterview{}} on success
   {:error, info} on failure
   """
-  @spec interviews_retrieve(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.ScheduledInterview.t} | {:error, Tesla.Env.t}
-  def interviews_retrieve(connection, x_account_token, id, opts \\ []) do
+  @spec interviews_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.ScheduledInterview.t} | {:error, Tesla.Env.t}
+  def interviews_retrieve(connection, authorization, x_account_token, id, opts \\ []) do
     optional_params = %{
       :"expand" => :query
     }
     %{}
     |> method(:get)
     |> url("/interviews/#{id}")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
