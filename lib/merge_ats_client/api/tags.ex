@@ -17,6 +17,7 @@ defmodule MergeATSClient.Api.Tags do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - opts (KeywordList): [optional] Optional parameters
     - :created_after (DateTime.t): If provided, will only return objects created after this datetime.
@@ -31,8 +32,8 @@ defmodule MergeATSClient.Api.Tags do
   {:ok, %MergeATSClient.Model.PaginatedTagList{}} on success
   {:error, info} on failure
   """
-  @spec tags_list(Tesla.Env.client, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedTagList.t} | {:error, Tesla.Env.t}
-  def tags_list(connection, x_account_token, opts \\ []) do
+  @spec tags_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedTagList.t} | {:error, Tesla.Env.t}
+  def tags_list(connection, authorization, x_account_token, opts \\ []) do
     optional_params = %{
       :"created_after" => :query,
       :"created_before" => :query,
@@ -45,6 +46,7 @@ defmodule MergeATSClient.Api.Tags do
     %{}
     |> method(:get)
     |> url("/tags")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])

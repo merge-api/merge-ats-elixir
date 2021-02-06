@@ -17,6 +17,7 @@ defmodule MergeATSClient.Api.Attachments do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - opts (KeywordList): [optional] Optional parameters
     - :candidate_id (String.t): If provided, will only return attachments for this candidate.
@@ -32,8 +33,8 @@ defmodule MergeATSClient.Api.Attachments do
   {:ok, %MergeATSClient.Model.PaginatedAttachmentList{}} on success
   {:error, info} on failure
   """
-  @spec attachments_list(Tesla.Env.client, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedAttachmentList.t} | {:error, Tesla.Env.t}
-  def attachments_list(connection, x_account_token, opts \\ []) do
+  @spec attachments_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedAttachmentList.t} | {:error, Tesla.Env.t}
+  def attachments_list(connection, authorization, x_account_token, opts \\ []) do
     optional_params = %{
       :"candidate_id" => :query,
       :"created_after" => :query,
@@ -47,6 +48,7 @@ defmodule MergeATSClient.Api.Attachments do
     %{}
     |> method(:get)
     |> url("/attachments")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
@@ -62,6 +64,7 @@ defmodule MergeATSClient.Api.Attachments do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - id (String.t): 
   - opts (KeywordList): [optional] Optional parameters
@@ -70,11 +73,12 @@ defmodule MergeATSClient.Api.Attachments do
   {:ok, %MergeATSClient.Model.Attachment{}} on success
   {:error, info} on failure
   """
-  @spec attachments_retrieve(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Attachment.t} | {:error, Tesla.Env.t}
-  def attachments_retrieve(connection, x_account_token, id, _opts \\ []) do
+  @spec attachments_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Attachment.t} | {:error, Tesla.Env.t}
+  def attachments_retrieve(connection, authorization, x_account_token, id, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/attachments/#{id}")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

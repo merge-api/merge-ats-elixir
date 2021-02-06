@@ -17,6 +17,7 @@ defmodule MergeATSClient.Api.Eeocs do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - opts (KeywordList): [optional] Optional parameters
     - :candidate_id (String.t): If provided, will only return EEOC info for this candidate.
@@ -33,8 +34,8 @@ defmodule MergeATSClient.Api.Eeocs do
   {:ok, %MergeATSClient.Model.PaginatedEeocList{}} on success
   {:error, info} on failure
   """
-  @spec eeocs_list(Tesla.Env.client, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedEeocList.t} | {:error, Tesla.Env.t}
-  def eeocs_list(connection, x_account_token, opts \\ []) do
+  @spec eeocs_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedEeocList.t} | {:error, Tesla.Env.t}
+  def eeocs_list(connection, authorization, x_account_token, opts \\ []) do
     optional_params = %{
       :"candidate_id" => :query,
       :"created_after" => :query,
@@ -49,6 +50,7 @@ defmodule MergeATSClient.Api.Eeocs do
     %{}
     |> method(:get)
     |> url("/eeocs")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
@@ -64,6 +66,7 @@ defmodule MergeATSClient.Api.Eeocs do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - id (String.t): 
   - opts (KeywordList): [optional] Optional parameters
@@ -73,14 +76,15 @@ defmodule MergeATSClient.Api.Eeocs do
   {:ok, %MergeATSClient.Model.Eeoc{}} on success
   {:error, info} on failure
   """
-  @spec eeocs_retrieve(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Eeoc.t} | {:error, Tesla.Env.t}
-  def eeocs_retrieve(connection, x_account_token, id, opts \\ []) do
+  @spec eeocs_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Eeoc.t} | {:error, Tesla.Env.t}
+  def eeocs_retrieve(connection, authorization, x_account_token, id, opts \\ []) do
     optional_params = %{
       :"expand" => :query
     }
     %{}
     |> method(:get)
     |> url("/eeocs/#{id}")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])

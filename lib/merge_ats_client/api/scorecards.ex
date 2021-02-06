@@ -17,6 +17,7 @@ defmodule MergeATSClient.Api.Scorecards do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - opts (KeywordList): [optional] Optional parameters
     - :application_id (String.t): If provided, will only return scorecards for this application.
@@ -35,8 +36,8 @@ defmodule MergeATSClient.Api.Scorecards do
   {:ok, %MergeATSClient.Model.PaginatedScorecardList{}} on success
   {:error, info} on failure
   """
-  @spec scorecards_list(Tesla.Env.client, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedScorecardList.t} | {:error, Tesla.Env.t}
-  def scorecards_list(connection, x_account_token, opts \\ []) do
+  @spec scorecards_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedScorecardList.t} | {:error, Tesla.Env.t}
+  def scorecards_list(connection, authorization, x_account_token, opts \\ []) do
     optional_params = %{
       :"application_id" => :query,
       :"created_after" => :query,
@@ -53,6 +54,7 @@ defmodule MergeATSClient.Api.Scorecards do
     %{}
     |> method(:get)
     |> url("/scorecards")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
@@ -68,6 +70,7 @@ defmodule MergeATSClient.Api.Scorecards do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - id (String.t): 
   - opts (KeywordList): [optional] Optional parameters
@@ -77,14 +80,15 @@ defmodule MergeATSClient.Api.Scorecards do
   {:ok, %MergeATSClient.Model.Scorecard{}} on success
   {:error, info} on failure
   """
-  @spec scorecards_retrieve(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Scorecard.t} | {:error, Tesla.Env.t}
-  def scorecards_retrieve(connection, x_account_token, id, opts \\ []) do
+  @spec scorecards_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Scorecard.t} | {:error, Tesla.Env.t}
+  def scorecards_retrieve(connection, authorization, x_account_token, id, opts \\ []) do
     optional_params = %{
       :"expand" => :query
     }
     %{}
     |> method(:get)
     |> url("/scorecards/#{id}")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
