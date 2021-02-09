@@ -43,11 +43,9 @@ defmodule MergeATSClient.Api.Offices do
       :"page_size" => :query,
       :"remote_id" => :query
     }
-    %{}
+    %{headers: [{"Authorization",authorization}, {"X-Account-Token",x_account_token}]}
     |> method(:get)
     |> url("/offices")
-    |> add_param(:headers, :"Authorization", authorization)
-    |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
@@ -73,11 +71,9 @@ defmodule MergeATSClient.Api.Offices do
   """
   @spec offices_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Office.t} | {:error, Tesla.Env.t}
   def offices_retrieve(connection, authorization, x_account_token, id, _opts \\ []) do
-    %{}
+    %{headers: [{"Authorization",authorization}, {"X-Account-Token",x_account_token}]}
     |> method(:get)
     |> url("/offices/#{id}")
-    |> add_param(:headers, :"Authorization", authorization)
-    |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> evaluate_response([

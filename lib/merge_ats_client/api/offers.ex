@@ -49,11 +49,9 @@ defmodule MergeATSClient.Api.Offers do
       :"page_size" => :query,
       :"remote_id" => :query
     }
-    %{}
+    %{headers: [{"Authorization",authorization}, {"X-Account-Token",x_account_token}]}
     |> method(:get)
     |> url("/offers")
-    |> add_param(:headers, :"Authorization", authorization)
-    |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
@@ -83,11 +81,9 @@ defmodule MergeATSClient.Api.Offers do
     optional_params = %{
       :"expand" => :query
     }
-    %{}
+    %{headers: [{"Authorization",authorization}, {"X-Account-Token",x_account_token}]}
     |> method(:get)
     |> url("/offers/#{id}")
-    |> add_param(:headers, :"Authorization", authorization)
-    |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

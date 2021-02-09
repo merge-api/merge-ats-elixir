@@ -43,11 +43,9 @@ defmodule MergeATSClient.Api.Tags do
       :"page_size" => :query,
       :"remote_id" => :query
     }
-    %{}
+    %{headers: [{"Authorization",authorization}, {"X-Account-Token",x_account_token}]}
     |> method(:get)
     |> url("/tags")
-    |> add_param(:headers, :"Authorization", authorization)
-    |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
