@@ -90,7 +90,8 @@ defmodule MergeATSClient.RequestBuilder do
   end
   def add_param(request, :headers, key, value) do
     request
-    |> Tesla.put_header(key, value)
+    |> Map.put_new(:headers, [])
+    |> Map.update!(:headers, fn existing_value -> existing_value ++ [{key, value}] end)
   end
   def add_param(request, :file, name, path) do
     request
