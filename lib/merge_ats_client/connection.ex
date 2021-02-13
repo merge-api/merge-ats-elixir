@@ -10,7 +10,7 @@ defmodule MergeATSClient.Connection do
   use Tesla
 
   # Add any middleware here (authentication)
-  plug Tesla.Middleware.BaseUrl, "http://127.0.0.1:8000/api/ats/v1"
+  plug Tesla.Middleware.BaseUrl, "https://api.merge.dev/api/ats/v1"
   plug Tesla.Middleware.Headers, [{"user-agent", "Elixir"}]
   plug Tesla.Middleware.EncodeJson, engine: Poison
 
