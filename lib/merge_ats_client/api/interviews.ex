@@ -25,6 +25,7 @@ defmodule MergeATSClient.Api.Interviews do
     - :created_before (DateTime.t): If provided, will only return objects created before this datetime.
     - :cursor (String.t): The pagination cursor value.
     - :expand (String.t): Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
+    - :job_interview_stage_id (String.t): If provided, will only return interviews at this stage.
     - :modified_after (DateTime.t): If provided, will only return objects modified after this datetime.
     - :modified_before (DateTime.t): If provided, will only return objects modified before this datetime.
     - :organizer_id (String.t): If provided, will only return interviews organized by this user.
@@ -43,6 +44,7 @@ defmodule MergeATSClient.Api.Interviews do
       :"created_before" => :query,
       :"cursor" => :query,
       :"expand" => :query,
+      :"job_interview_stage_id" => :query,
       :"modified_after" => :query,
       :"modified_before" => :query,
       :"organizer_id" => :query,
