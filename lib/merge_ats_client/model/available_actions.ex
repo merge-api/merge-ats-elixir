@@ -9,19 +9,19 @@ defmodule MergeATSClient.Model.AvailableActions do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"model_name",
-    :"available_operations"
+    :"available_model_operations"
   ]
 
   @type t :: %__MODULE__{
-    :"model_name" => String.t,
-    :"available_operations" => [String.t]
+    :"available_model_operations" => [ModelOperation] | nil
   }
 end
 
 defimpl Poison.Decoder, for: MergeATSClient.Model.AvailableActions do
-  def decode(value, _options) do
+  import MergeATSClient.Deserializer
+  def decode(value, options) do
     value
+    |> deserialize(:"available_model_operations", :list, MergeATSClient.Model.ModelOperation, options)
   end
 end
 
