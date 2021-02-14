@@ -38,7 +38,6 @@ lib/merge_ats_client/model/end_user_details.ex
 lib/merge_ats_client/model/gender_enum.ex
 lib/merge_ats_client/model/job.ex
 lib/merge_ats_client/model/job_interview_stage.ex
-lib/merge_ats_client/model/job_interview_stage_change.ex
 lib/merge_ats_client/model/job_status_enum.ex
 lib/merge_ats_client/model/link_token.ex
 lib/merge_ats_client/model/model_operation.ex

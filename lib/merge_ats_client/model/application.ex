@@ -19,7 +19,6 @@ defmodule MergeATSClient.Model.Application do
     :"source",
     :"credited_to",
     :"current_stage",
-    :"stage_changes",
     :"reject_reason"
   ]
 
@@ -34,16 +33,13 @@ defmodule MergeATSClient.Model.Application do
     :"source" => String.t | nil,
     :"credited_to" => String.t | nil,
     :"current_stage" => String.t | nil,
-    :"stage_changes" => [JobInterviewStageChange] | nil,
     :"reject_reason" => String.t | nil
   }
 end
 
 defimpl Poison.Decoder, for: MergeATSClient.Model.Application do
-  import MergeATSClient.Deserializer
-  def decode(value, options) do
+  def decode(value, _options) do
     value
-    |> deserialize(:"stage_changes", :list, MergeATSClient.Model.JobInterviewStageChange, options)
   end
 end
 
