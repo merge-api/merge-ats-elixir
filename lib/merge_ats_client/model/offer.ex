@@ -17,7 +17,8 @@ defmodule MergeATSClient.Model.Offer do
     :"closed_at",
     :"sent_at",
     :"start_date",
-    :"status"
+    :"status",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
@@ -29,7 +30,8 @@ defmodule MergeATSClient.Model.Offer do
     :"closed_at" => DateTime.t | nil,
     :"sent_at" => DateTime.t | nil,
     :"start_date" => DateTime.t | nil,
-    :"status" => OfferStatusEnum | nil
+    :"status" => OfferStatusEnum | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
@@ -38,6 +40,7 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.Offer do
   def decode(value, options) do
     value
     |> deserialize(:"status", :struct, MergeATSClient.Model.OfferStatusEnum, options)
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

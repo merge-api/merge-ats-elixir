@@ -16,7 +16,8 @@ defmodule MergeATSClient.Model.Eeoc do
     :"race",
     :"gender",
     :"veteran_status",
-    :"disability_status"
+    :"disability_status",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
@@ -27,7 +28,8 @@ defmodule MergeATSClient.Model.Eeoc do
     :"race" => RaceEnum | nil,
     :"gender" => GenderEnum | nil,
     :"veteran_status" => VeteranStatusEnum | nil,
-    :"disability_status" => DisabilityStatusEnum | nil
+    :"disability_status" => DisabilityStatusEnum | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
@@ -39,6 +41,7 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.Eeoc do
     |> deserialize(:"gender", :struct, MergeATSClient.Model.GenderEnum, options)
     |> deserialize(:"veteran_status", :struct, MergeATSClient.Model.VeteranStatusEnum, options)
     |> deserialize(:"disability_status", :struct, MergeATSClient.Model.DisabilityStatusEnum, options)
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

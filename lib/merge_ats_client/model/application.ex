@@ -19,7 +19,8 @@ defmodule MergeATSClient.Model.Application do
     :"source",
     :"credited_to",
     :"current_stage",
-    :"reject_reason"
+    :"reject_reason",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
@@ -33,13 +34,16 @@ defmodule MergeATSClient.Model.Application do
     :"source" => String.t | nil,
     :"credited_to" => String.t | nil,
     :"current_stage" => String.t | nil,
-    :"reject_reason" => String.t | nil
+    :"reject_reason" => String.t | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
 defimpl Poison.Decoder, for: MergeATSClient.Model.Application do
-  def decode(value, _options) do
+  import MergeATSClient.Deserializer
+  def decode(value, options) do
     value
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

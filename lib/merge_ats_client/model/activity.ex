@@ -16,7 +16,8 @@ defmodule MergeATSClient.Model.Activity do
     :"activity_type",
     :"subject",
     :"body",
-    :"visibility"
+    :"visibility",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
@@ -27,7 +28,8 @@ defmodule MergeATSClient.Model.Activity do
     :"activity_type" => ActivityTypeEnum | nil,
     :"subject" => String.t | nil,
     :"body" => String.t | nil,
-    :"visibility" => VisibilityEnum | nil
+    :"visibility" => VisibilityEnum | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
@@ -37,6 +39,7 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.Activity do
     value
     |> deserialize(:"activity_type", :struct, MergeATSClient.Model.ActivityTypeEnum, options)
     |> deserialize(:"visibility", :struct, MergeATSClient.Model.VisibilityEnum, options)
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

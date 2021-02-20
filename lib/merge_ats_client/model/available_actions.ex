@@ -4,15 +4,19 @@
 
 defmodule MergeATSClient.Model.AvailableActions do
   @moduledoc """
-  
+  # The AvailableActions Object ### Description The `Activity` object is used to see all available model/operation combinations for an integration.  ### Usage Example Fetch all the actions available for the `Zenefits` integration.
   """
 
   @derive [Poison.Encoder]
   defstruct [
+    :"integration",
+    :"passthrough_available",
     :"available_model_operations"
   ]
 
   @type t :: %__MODULE__{
+    :"integration" => AccountIntegration,
+    :"passthrough_available" => boolean(),
     :"available_model_operations" => [ModelOperation] | nil
   }
 end
@@ -21,6 +25,7 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.AvailableActions do
   import MergeATSClient.Deserializer
   def decode(value, options) do
     value
+    |> deserialize(:"integration", :struct, MergeATSClient.Model.AccountIntegration, options)
     |> deserialize(:"available_model_operations", :list, MergeATSClient.Model.ModelOperation, options)
   end
 end

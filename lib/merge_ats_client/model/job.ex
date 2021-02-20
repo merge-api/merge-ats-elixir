@@ -18,7 +18,8 @@ defmodule MergeATSClient.Model.Job do
     :"confidential",
     :"departments",
     :"offices",
-    :"hiring_managers"
+    :"hiring_managers",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
@@ -31,7 +32,8 @@ defmodule MergeATSClient.Model.Job do
     :"confidential" => boolean() | nil,
     :"departments" => [String.t] | nil,
     :"offices" => [String.t] | nil,
-    :"hiring_managers" => [String.t] | nil
+    :"hiring_managers" => [String.t] | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
@@ -40,6 +42,7 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.Job do
   def decode(value, options) do
     value
     |> deserialize(:"status", :struct, MergeATSClient.Model.JobStatusEnum, options)
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

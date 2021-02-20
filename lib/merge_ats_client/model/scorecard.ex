@@ -16,7 +16,8 @@ defmodule MergeATSClient.Model.Scorecard do
     :"interviewer",
     :"remote_created_at",
     :"submitted_at",
-    :"overall_recommendation"
+    :"overall_recommendation",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
@@ -27,7 +28,8 @@ defmodule MergeATSClient.Model.Scorecard do
     :"interviewer" => String.t | nil,
     :"remote_created_at" => DateTime.t | nil,
     :"submitted_at" => DateTime.t | nil,
-    :"overall_recommendation" => OverallRecommendationEnum | nil
+    :"overall_recommendation" => OverallRecommendationEnum | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
@@ -36,6 +38,7 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.Scorecard do
   def decode(value, options) do
     value
     |> deserialize(:"overall_recommendation", :struct, MergeATSClient.Model.OverallRecommendationEnum, options)
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

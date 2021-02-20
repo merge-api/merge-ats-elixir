@@ -12,20 +12,24 @@ defmodule MergeATSClient.Model.Office do
     :"id",
     :"remote_id",
     :"name",
-    :"location"
+    :"location",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
     :"id" => String.t | nil,
     :"remote_id" => String.t | nil,
     :"name" => String.t | nil,
-    :"location" => String.t | nil
+    :"location" => String.t | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
 defimpl Poison.Decoder, for: MergeATSClient.Model.Office do
-  def decode(value, _options) do
+  import MergeATSClient.Deserializer
+  def decode(value, options) do
     value
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

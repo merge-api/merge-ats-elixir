@@ -24,6 +24,7 @@ defmodule MergeATSClient.Api.JobInterviewStages do
     - :created_before (DateTime.t): If provided, will only return objects created before this datetime.
     - :cursor (String.t): The pagination cursor value.
     - :expand (String.t): Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
+    - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
     - :job_id (String.t): If provided, will only return interview stages for this job.
     - :modified_after (DateTime.t): If provided, will only return objects modified after this datetime.
     - :modified_before (DateTime.t): If provided, will only return objects modified before this datetime.
@@ -41,6 +42,7 @@ defmodule MergeATSClient.Api.JobInterviewStages do
       :"created_before" => :query,
       :"cursor" => :query,
       :"expand" => :query,
+      :"include_remote_data" => :query,
       :"job_id" => :query,
       :"modified_after" => :query,
       :"modified_before" => :query,
@@ -71,6 +73,7 @@ defmodule MergeATSClient.Api.JobInterviewStages do
   - id (String.t): 
   - opts (KeywordList): [optional] Optional parameters
     - :expand (String.t): Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
+    - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
   {:ok, %MergeATSClient.Model.JobInterviewStage{}} on success
@@ -79,7 +82,8 @@ defmodule MergeATSClient.Api.JobInterviewStages do
   @spec job_interview_stages_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.JobInterviewStage.t} | {:error, Tesla.Env.t}
   def job_interview_stages_retrieve(connection, authorization, x_account_token, id, opts \\ []) do
     optional_params = %{
-      :"expand" => :query
+      :"expand" => :query,
+      :"include_remote_data" => :query
     }
     %{}
     |> method(:get)
