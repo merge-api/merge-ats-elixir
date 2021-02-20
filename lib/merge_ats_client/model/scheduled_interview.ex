@@ -20,7 +20,8 @@ defmodule MergeATSClient.Model.ScheduledInterview do
     :"end_at",
     :"remote_created_at",
     :"remote_updated_at",
-    :"status"
+    :"status",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
@@ -35,7 +36,8 @@ defmodule MergeATSClient.Model.ScheduledInterview do
     :"end_at" => DateTime.t | nil,
     :"remote_created_at" => DateTime.t | nil,
     :"remote_updated_at" => DateTime.t | nil,
-    :"status" => ScheduledInterviewStatusEnum | nil
+    :"status" => ScheduledInterviewStatusEnum | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
@@ -44,6 +46,7 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.ScheduledInterview do
   def decode(value, options) do
     value
     |> deserialize(:"status", :struct, MergeATSClient.Model.ScheduledInterviewStatusEnum, options)
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

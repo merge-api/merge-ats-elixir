@@ -12,20 +12,24 @@ defmodule MergeATSClient.Model.Attachment do
     :"id",
     :"remote_id",
     :"file_name",
-    :"file_url"
+    :"file_url",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
     :"id" => String.t | nil,
     :"remote_id" => String.t | nil,
     :"file_name" => String.t | nil,
-    :"file_url" => String.t | nil
+    :"file_url" => String.t | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
 defimpl Poison.Decoder, for: MergeATSClient.Model.Attachment do
-  def decode(value, _options) do
+  import MergeATSClient.Deserializer
+  def decode(value, options) do
     value
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

@@ -16,7 +16,8 @@ defmodule MergeATSClient.Model.RemoteUser do
     :"email",
     :"disabled",
     :"remote_created_at",
-    :"access_role"
+    :"access_role",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
@@ -27,7 +28,8 @@ defmodule MergeATSClient.Model.RemoteUser do
     :"email" => String.t | nil,
     :"disabled" => boolean() | nil,
     :"remote_created_at" => DateTime.t | nil,
-    :"access_role" => AccessRoleEnum | nil
+    :"access_role" => AccessRoleEnum | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
@@ -36,6 +38,7 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.RemoteUser do
   def decode(value, options) do
     value
     |> deserialize(:"access_role", :struct, MergeATSClient.Model.AccessRoleEnum, options)
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

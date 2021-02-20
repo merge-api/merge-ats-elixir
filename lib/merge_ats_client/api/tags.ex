@@ -23,6 +23,7 @@ defmodule MergeATSClient.Api.Tags do
     - :created_after (DateTime.t): If provided, will only return objects created after this datetime.
     - :created_before (DateTime.t): If provided, will only return objects created before this datetime.
     - :cursor (String.t): The pagination cursor value.
+    - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
     - :modified_after (DateTime.t): If provided, will only return objects modified after this datetime.
     - :modified_before (DateTime.t): If provided, will only return objects modified before this datetime.
     - :page_size (integer()): Number of results to return per page.
@@ -38,6 +39,7 @@ defmodule MergeATSClient.Api.Tags do
       :"created_after" => :query,
       :"created_before" => :query,
       :"cursor" => :query,
+      :"include_remote_data" => :query,
       :"modified_after" => :query,
       :"modified_before" => :query,
       :"page_size" => :query,

@@ -26,7 +26,8 @@ defmodule MergeATSClient.Model.Candidate do
     :"urls",
     :"tags",
     :"applications",
-    :"attachments"
+    :"attachments",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
@@ -47,7 +48,8 @@ defmodule MergeATSClient.Model.Candidate do
     :"urls" => [Url] | nil,
     :"tags" => [Tag] | nil,
     :"applications" => [String.t] | nil,
-    :"attachments" => [String.t] | nil
+    :"attachments" => [String.t] | nil,
+    :"remote_data" => [RemoteData] | nil
   }
 end
 
@@ -59,6 +61,7 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.Candidate do
     |> deserialize(:"email_addresses", :list, MergeATSClient.Model.EmailAddress, options)
     |> deserialize(:"urls", :list, MergeATSClient.Model.Url, options)
     |> deserialize(:"tags", :list, MergeATSClient.Model.Tag, options)
+    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 
