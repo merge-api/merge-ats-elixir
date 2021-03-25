@@ -10,12 +10,14 @@ defmodule MergeATSClient.Model.ModelOperation do
   @derive [Poison.Encoder]
   defstruct [
     :"model_name",
-    :"available_operations"
+    :"available_operations",
+    :"required_post_parameters"
   ]
 
   @type t :: %__MODULE__{
     :"model_name" => String.t,
-    :"available_operations" => [String.t]
+    :"available_operations" => [String.t],
+    :"required_post_parameters" => [String.t]
   }
 end
 

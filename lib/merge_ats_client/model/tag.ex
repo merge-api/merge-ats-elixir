@@ -4,18 +4,20 @@
 
 defmodule MergeATSClient.Model.Tag do
   @moduledoc """
-  # The Tag Object ### Description The `Tag` object is used to represent a tag for a candidate.  ### Usage Example Fetch from the `GET Candidate` endpoint and view their tags.
+  # The Tag Object ### Description The `Tag` object is used to represent a tag for a candidate.  ### Usage Example Fetch from the `LIST Tags` endpoint and view the tags used within a company.
   """
 
   @derive [Poison.Encoder]
   defstruct [
     :"remote_id",
-    :"name"
+    :"name",
+    :"remote_data"
   ]
 
   @type t :: %__MODULE__{
     :"remote_id" => String.t | nil,
-    :"name" => String.t | nil
+    :"name" => String.t | nil,
+    :"remote_data" => [%{optional(String.t) => AnyType}] | nil
   }
 end
 
