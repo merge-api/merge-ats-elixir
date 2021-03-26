@@ -4,7 +4,7 @@
 
 defmodule MergeATSClient.Model.Attachment do
   @moduledoc """
-  # The Attachment Object ### Description The `Attachment` object is used to represent a attachment for a candidate.  ### Usage Example Fetch from the `GET Candidate` endpoint and view their attachments.
+  # The Attachment Object ### Description The `Attachment` object is used to represent a attachment for a candidate.  ### Usage Example Fetch from the `LIST Attachments` endpoint and view attachments accessible by a company.
   """
 
   @derive [Poison.Encoder]

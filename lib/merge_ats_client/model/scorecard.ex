@@ -4,7 +4,7 @@
 
 defmodule MergeATSClient.Model.Scorecard do
   @moduledoc """
-  # The Scorecard Object ### Description The `Scorecard` object is used to represent a Scorecard for an interview  ### Usage Example Fetch from the `LIST Scorecard` endpoint and filter by `application` to show all scorecard for an applicant.
+  # The Scorecard Object ### Description The `Scorecard` object is used to represent a Scorecard for an interview  ### Usage Example Fetch from the `LIST Scorecards` endpoint and filter by `application` to show all scorecard for an applicant.
   """
 
   @derive [Poison.Encoder]

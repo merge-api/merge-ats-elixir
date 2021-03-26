@@ -17,19 +17,19 @@ defmodule MergeATSClient.Api.LinkToken do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
-  - end_user_details (EndUserDetails): 
+  - end_user_details_request (EndUserDetailsRequest): 
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
   {:ok, %MergeATSClient.Model.LinkToken{}} on success
   {:error, info} on failure
   """
-  @spec link_token_create(Tesla.Env.client, MergeATSClient.Model.EndUserDetails.t, keyword()) :: {:ok, MergeATSClient.Model.LinkToken.t} | {:error, Tesla.Env.t}
-  def link_token_create(connection, end_user_details, _opts \\ []) do
+  @spec link_token_create(Tesla.Env.client, MergeATSClient.Model.EndUserDetailsRequest.t, keyword()) :: {:ok, MergeATSClient.Model.LinkToken.t} | {:error, Tesla.Env.t}
+  def link_token_create(connection, end_user_details_request, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/link-token")
-    |> add_param(:body, :body, end_user_details)
+    |> add_param(:body, :body, end_user_details_request)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> evaluate_response([

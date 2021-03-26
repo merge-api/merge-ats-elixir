@@ -16,6 +16,7 @@ lib/merge_ats_client/api/link_token.ex
 lib/merge_ats_client/api/offers.ex
 lib/merge_ats_client/api/offices.ex
 lib/merge_ats_client/api/passthrough.ex
+lib/merge_ats_client/api/regenerate_key.ex
 lib/merge_ats_client/api/reject_reasons.ex
 lib/merge_ats_client/api/scorecards.ex
 lib/merge_ats_client/api/tags.ex
@@ -31,13 +32,13 @@ lib/merge_ats_client/model/application.ex
 lib/merge_ats_client/model/attachment.ex
 lib/merge_ats_client/model/available_actions.ex
 lib/merge_ats_client/model/candidate.ex
-lib/merge_ats_client/model/data_passthrough.ex
+lib/merge_ats_client/model/data_passthrough_request.ex
 lib/merge_ats_client/model/department.ex
 lib/merge_ats_client/model/disability_status_enum.ex
 lib/merge_ats_client/model/eeoc.ex
 lib/merge_ats_client/model/email_address.ex
 lib/merge_ats_client/model/email_address_type_enum.ex
-lib/merge_ats_client/model/end_user_details.ex
+lib/merge_ats_client/model/end_user_details_request.ex
 lib/merge_ats_client/model/gender_enum.ex
 lib/merge_ats_client/model/job.ex
 lib/merge_ats_client/model/job_interview_stage.ex
@@ -69,6 +70,8 @@ lib/merge_ats_client/model/phone_number_type_enum.ex
 lib/merge_ats_client/model/race_enum.ex
 lib/merge_ats_client/model/reject_reason.ex
 lib/merge_ats_client/model/remote_data.ex
+lib/merge_ats_client/model/remote_key.ex
+lib/merge_ats_client/model/remote_key_for_regeneration_request.ex
 lib/merge_ats_client/model/remote_response.ex
 lib/merge_ats_client/model/remote_user.ex
 lib/merge_ats_client/model/scheduled_interview.ex
