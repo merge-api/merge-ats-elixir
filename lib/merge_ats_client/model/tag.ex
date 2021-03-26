@@ -17,7 +17,7 @@ defmodule MergeATSClient.Model.Tag do
   @type t :: %__MODULE__{
     :"remote_id" => String.t | nil,
     :"name" => String.t | nil,
-    :"remote_data" => [%{optional(String.t) => AnyType}] | nil
+    :"remote_data" => [RemoteData] | nil
   }
 end
 

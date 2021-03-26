@@ -30,8 +30,6 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.DataPassthroughRequest do
   def decode(value, options) do
     value
     |> deserialize(:"method", :struct, MergeATSClient.Model.MethodEnum, options)
-    |> deserialize(:"data", :map, MergeATSClient.Model.AnyType, options)
-    |> deserialize(:"headers", :map, MergeATSClient.Model.AnyType, options)
   end
 end
 
