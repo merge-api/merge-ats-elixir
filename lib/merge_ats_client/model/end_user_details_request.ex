@@ -12,14 +12,16 @@ defmodule MergeATSClient.Model.EndUserDetailsRequest do
     :"end_user_email_address",
     :"end_user_organization_name",
     :"end_user_origin_id",
-    :"categories"
+    :"categories",
+    :"integration"
   ]
 
   @type t :: %__MODULE__{
     :"end_user_email_address" => String.t,
     :"end_user_organization_name" => String.t,
     :"end_user_origin_id" => String.t,
-    :"categories" => [String.t]
+    :"categories" => [String.t],
+    :"integration" => String.t | nil
   }
 end
 

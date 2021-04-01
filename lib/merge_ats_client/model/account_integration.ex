@@ -13,7 +13,8 @@ defmodule MergeATSClient.Model.AccountIntegration do
     :"categories",
     :"image",
     :"square_image",
-    :"color"
+    :"color",
+    :"slug"
   ]
 
   @type t :: %__MODULE__{
@@ -21,7 +22,8 @@ defmodule MergeATSClient.Model.AccountIntegration do
     :"categories" => [String.t] | nil,
     :"image" => String.t | nil,
     :"square_image" => String.t | nil,
-    :"color" => String.t | nil
+    :"color" => String.t | nil,
+    :"slug" => String.t | nil
   }
 end
 
