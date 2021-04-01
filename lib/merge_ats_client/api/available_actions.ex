@@ -20,23 +20,18 @@ defmodule MergeATSClient.Api.AvailableActions do
   - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - opts (KeywordList): [optional] Optional parameters
-    - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
   {:ok, %MergeATSClient.Model.AvailableActions{}} on success
   {:error, info} on failure
   """
   @spec available_actions_retrieve(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.AvailableActions.t} | {:error, Tesla.Env.t}
-  def available_actions_retrieve(connection, authorization, x_account_token, opts \\ []) do
-    optional_params = %{
-      :"include_remote_data" => :query
-    }
+  def available_actions_retrieve(connection, authorization, x_account_token, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/available-actions")
     |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
-    |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> evaluate_response([
