@@ -4,7 +4,7 @@
 
 defmodule MergeATSClient.Model.RemoteKeyForRegenerationRequest do
   @moduledoc """
-  # The RemoteResponse Object ### Description The `RemoteResponse` object is used to represent information returned from a third-party endpoint.  ### Usage Example View the `RemoteResponse` returned from your `DataPassthrough`.
+  # The RemoteKeyForRegeneration Object ### Description The `RemoteKeyForRegeneration` object is used to exchange an old remote key for a new one  ### Usage Example Post a `RemoteKeyForRegeneration` to swap out an old remote key for a new one
   """
 
   @derive [Poison.Encoder]

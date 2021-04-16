@@ -4,7 +4,7 @@
 
 defmodule MergeATSClient.Model.SyncStatus do
   @moduledoc """
-  # The RemoteResponse Object ### Description The `RemoteResponse` object is used to represent information returned from a third-party endpoint.  ### Usage Example View the `RemoteResponse` returned from your `DataPassthrough`.
+  # The SyncStatus Object ### Description The `SyncStatus` object is used to represent the syncing state of an account  ### Usage Example View the `SyncStatus` for an account to see how recently its models were synced.
   """
 
   @derive [Poison.Encoder]
