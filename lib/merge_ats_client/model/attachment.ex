@@ -13,6 +13,7 @@ defmodule MergeATSClient.Model.Attachment do
     :"remote_id",
     :"file_name",
     :"file_url",
+    :"candidate",
     :"remote_data"
   ]
 
@@ -21,6 +22,7 @@ defmodule MergeATSClient.Model.Attachment do
     :"remote_id" => String.t | nil,
     :"file_name" => String.t | nil,
     :"file_url" => String.t | nil,
+    :"candidate" => String.t | nil,
     :"remote_data" => [RemoteData] | nil
   }
 end

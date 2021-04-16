@@ -17,6 +17,7 @@ defmodule MergeATSClient.Api.RegenerateKey do
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - remote_key_for_regeneration_request (RemoteKeyForRegenerationRequest): 
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
@@ -24,11 +25,12 @@ defmodule MergeATSClient.Api.RegenerateKey do
   {:ok, %MergeATSClient.Model.RemoteKey{}} on success
   {:error, info} on failure
   """
-  @spec regenerate_key_create(Tesla.Env.client, MergeATSClient.Model.RemoteKeyForRegenerationRequest.t, keyword()) :: {:ok, MergeATSClient.Model.RemoteKey.t} | {:error, Tesla.Env.t}
-  def regenerate_key_create(connection, remote_key_for_regeneration_request, _opts \\ []) do
+  @spec regenerate_key_create(Tesla.Env.client, String.t, MergeATSClient.Model.RemoteKeyForRegenerationRequest.t, keyword()) :: {:ok, MergeATSClient.Model.RemoteKey.t} | {:error, Tesla.Env.t}
+  def regenerate_key_create(connection, authorization, remote_key_for_regeneration_request, _opts \\ []) do
     %{}
     |> method(:post)
     |> url("/regenerate-key")
+    |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:body, :body, remote_key_for_regeneration_request)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
