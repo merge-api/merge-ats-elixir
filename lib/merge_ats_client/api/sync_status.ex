@@ -20,18 +20,52 @@ defmodule MergeATSClient.Api.SyncStatus do
   - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
   - opts (KeywordList): [optional] Optional parameters
+    - :cursor (integer()): The pagination cursor value.
+    - :page_size (integer()): Number of results to return per page.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.SyncStatus{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedSyncStatusList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
-  @spec sync_status_retrieve(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.SyncStatus.t} | {:error, Tesla.Env.t}
-  def sync_status_retrieve(connection, authorization, x_account_token, _opts \\ []) do
+  @spec sync_status_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedSyncStatusList.t} | {:error, Tesla.Env.t}
+  def sync_status_list(connection, authorization, x_account_token, opts \\ []) do
+    optional_params = %{
+      :"cursor" => :query,
+      :"page_size" => :query
+    }
     %{}
     |> method(:get)
     |> url("/sync-status")
     |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
+    |> add_optional_params(optional_params, opts)
+    |> Enum.into([])
+    |> (&Connection.request(connection, &1)).()
+    |> evaluate_response([
+      { 200, %MergeATSClient.Model.PaginatedSyncStatusList{}}
+    ])
+  end
+
+  @doc """
+  Force resync of all models.
+
+  ## Parameters
+
+  - connection (MergeATSClient.Connection): Connection to server
+  - x_account_token (String.t): Token identifying the end user.
+  - opts (KeywordList): [optional] Optional parameters
+  ## Returns
+
+  {:ok, MergeATSClient.Model.SyncStatus.t} on success
+  {:error, Tesla.Env.t} on failure
+  """
+  @spec sync_status_resync_create(Tesla.Env.client, String.t, keyword()) :: {:ok, MergeATSClient.Model.SyncStatus.t} | {:error, Tesla.Env.t}
+  def sync_status_resync_create(connection, x_account_token, _opts \\ []) do
+    %{}
+    |> method(:post)
+    |> url("/sync-status/resync")
+    |> add_param(:headers, :"X-Account-Token", x_account_token)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> evaluate_response([

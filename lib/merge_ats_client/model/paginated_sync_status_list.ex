@@ -2,7 +2,7 @@
 # https://openapi-generator.tech
 # Do not edit the class manually.
 
-defmodule MergeATSClient.Model.PaginatedDepartmentList do
+defmodule MergeATSClient.Model.PaginatedSyncStatusList do
   @moduledoc """
   
   """
@@ -17,15 +17,15 @@ defmodule MergeATSClient.Model.PaginatedDepartmentList do
   @type t :: %__MODULE__{
     :"next" => String.t | nil,
     :"previous" => String.t | nil,
-    :"results" => [MergeATSClient.Model.Department.t] | nil
+    :"results" => [MergeATSClient.Model.SyncStatus.t] | nil
   }
 end
 
-defimpl Poison.Decoder, for: MergeATSClient.Model.PaginatedDepartmentList do
+defimpl Poison.Decoder, for: MergeATSClient.Model.PaginatedSyncStatusList do
   import MergeATSClient.Deserializer
   def decode(value, options) do
     value
-    |> deserialize(:"results", :list, MergeATSClient.Model.Department, options)
+    |> deserialize(:"results", :list, MergeATSClient.Model.SyncStatus, options)
   end
 end
 

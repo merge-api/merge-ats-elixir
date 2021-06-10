@@ -2,14 +2,13 @@
 # https://openapi-generator.tech
 # Do not edit the class manually.
 
-defmodule MergeATSClient.Model.ScheduledInterview do
+defmodule MergeATSClient.Model.ScheduledInterviewRequest do
   @moduledoc """
   # The ScheduledInterview Object ### Description The `ScheduledInterview` object is used to represent an interview  ### Usage Example Fetch from the `LIST ScheduledInterviews` endpoint and filter by `interviewers` to show all office locations.
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"id",
     :"remote_id",
     :"application",
     :"job_interview_stage",
@@ -20,12 +19,10 @@ defmodule MergeATSClient.Model.ScheduledInterview do
     :"end_at",
     :"remote_created_at",
     :"remote_updated_at",
-    :"status",
-    :"remote_data"
+    :"status"
   ]
 
   @type t :: %__MODULE__{
-    :"id" => String.t | nil,
     :"remote_id" => String.t | nil,
     :"application" => String.t | nil,
     :"job_interview_stage" => String.t | nil,
@@ -36,17 +33,15 @@ defmodule MergeATSClient.Model.ScheduledInterview do
     :"end_at" => DateTime.t | nil,
     :"remote_created_at" => DateTime.t | nil,
     :"remote_updated_at" => DateTime.t | nil,
-    :"status" => ScheduledInterviewStatusEnum | nil,
-    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
+    :"status" => ScheduledInterviewStatusEnum | nil
   }
 end
 
-defimpl Poison.Decoder, for: MergeATSClient.Model.ScheduledInterview do
+defimpl Poison.Decoder, for: MergeATSClient.Model.ScheduledInterviewRequest do
   import MergeATSClient.Deserializer
   def decode(value, options) do
     value
     |> deserialize(:"status", :struct, MergeATSClient.Model.ScheduledInterviewStatusEnum, options)
-    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

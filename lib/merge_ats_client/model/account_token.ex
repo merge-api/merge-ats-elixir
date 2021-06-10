@@ -9,17 +9,21 @@ defmodule MergeATSClient.Model.AccountToken do
 
   @derive [Poison.Encoder]
   defstruct [
-    :"account_token"
+    :"account_token",
+    :"integration"
   ]
 
   @type t :: %__MODULE__{
-    :"account_token" => String.t
+    :"account_token" => String.t,
+    :"integration" => MergeATSClient.Model.AccountIntegration.t
   }
 end
 
 defimpl Poison.Decoder, for: MergeATSClient.Model.AccountToken do
-  def decode(value, _options) do
+  import MergeATSClient.Deserializer
+  def decode(value, options) do
     value
+    |> deserialize(:"integration", :struct, MergeATSClient.Model.AccountIntegration, options)
   end
 end
 

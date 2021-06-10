@@ -30,8 +30,8 @@ defmodule MergeATSClient.Api.Tags do
     - :remote_id (String.t): The API provider's ID for the given object.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedTagList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedTagList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec tags_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedTagList.t} | {:error, Tesla.Env.t}
   def tags_list(connection, authorization, x_account_token, opts \\ []) do

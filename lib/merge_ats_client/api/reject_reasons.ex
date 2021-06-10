@@ -30,8 +30,8 @@ defmodule MergeATSClient.Api.RejectReasons do
     - :remote_id (String.t): The API provider's ID for the given object.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedRejectReasonList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedRejectReasonList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec reject_reasons_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedRejectReasonList.t} | {:error, Tesla.Env.t}
   def reject_reasons_list(connection, authorization, x_account_token, opts \\ []) do
@@ -71,8 +71,8 @@ defmodule MergeATSClient.Api.RejectReasons do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.RejectReason{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.RejectReason.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec reject_reasons_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.RejectReason.t} | {:error, Tesla.Env.t}
   def reject_reasons_retrieve(connection, authorization, x_account_token, id, opts \\ []) do

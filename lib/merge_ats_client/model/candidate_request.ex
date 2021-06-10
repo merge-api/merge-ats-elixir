@@ -23,7 +23,9 @@ defmodule MergeATSClient.Model.CandidateRequest do
     :"phone_numbers",
     :"email_addresses",
     :"urls",
-    :"tags"
+    :"tags",
+    :"applications",
+    :"attachments"
   ]
 
   @type t :: %__MODULE__{
@@ -38,10 +40,12 @@ defmodule MergeATSClient.Model.CandidateRequest do
     :"is_private" => boolean() | nil,
     :"can_email" => boolean() | nil,
     :"locations" => [String.t] | nil,
-    :"phone_numbers" => [PhoneNumberRequest] | nil,
-    :"email_addresses" => [EmailAddressRequest] | nil,
-    :"urls" => [UrlRequest] | nil,
-    :"tags" => [String.t] | nil
+    :"phone_numbers" => [MergeATSClient.Model.PhoneNumberRequest.t] | nil,
+    :"email_addresses" => [MergeATSClient.Model.EmailAddressRequest.t] | nil,
+    :"urls" => [MergeATSClient.Model.UrlRequest.t] | nil,
+    :"tags" => [String.t] | nil,
+    :"applications" => [String.t] | nil,
+    :"attachments" => [String.t] | nil
   }
 end
 

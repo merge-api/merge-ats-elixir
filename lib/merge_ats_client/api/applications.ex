@@ -25,8 +25,8 @@ defmodule MergeATSClient.Api.Applications do
     - :body (ApplicationRequest): 
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Application{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Application.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec applications_create(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Application.t} | {:error, Tesla.Env.t}
   def applications_create(connection, authorization, x_account_token, remote_user_id, opts \\ []) do
@@ -41,6 +41,7 @@ defmodule MergeATSClient.Api.Applications do
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_param(:query, :"remote_user_id", remote_user_id)
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> evaluate_response([
@@ -73,8 +74,8 @@ defmodule MergeATSClient.Api.Applications do
     - :remote_id (String.t): The API provider's ID for the given object.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedApplicationList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedApplicationList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec applications_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedApplicationList.t} | {:error, Tesla.Env.t}
   def applications_list(connection, authorization, x_account_token, opts \\ []) do
@@ -108,44 +109,6 @@ defmodule MergeATSClient.Api.Applications do
   end
 
   @doc """
-  Updates an `Application` object with the given `id`.
-
-  ## Parameters
-
-  - connection (MergeATSClient.Connection): Connection to server
-  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
-  - x_account_token (String.t): Token identifying the end user.
-  - id (String.t): 
-  - remote_user_id (String.t): The ID of the RemoteUser deleting the resource. This can be found in the ID field (not remote_id) in the RemoteUser table.
-  - opts (KeywordList): [optional] Optional parameters
-    - :run_async (boolean()): Whether or not third-party updates should be run asynchronously.
-    - :body (PatchedApplicationRequest): 
-  ## Returns
-
-  {:ok, %MergeATSClient.Model.Application{}} on success
-  {:error, info} on failure
-  """
-  @spec applications_partial_update(Tesla.Env.client, String.t, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Application.t} | {:error, Tesla.Env.t}
-  def applications_partial_update(connection, authorization, x_account_token, id, remote_user_id, opts \\ []) do
-    optional_params = %{
-      :"run_async" => :query,
-      :body => :body
-    }
-    %{}
-    |> method(:patch)
-    |> url("/applications/#{id}")
-    |> add_param(:headers, :"Authorization", authorization)
-    |> add_param(:headers, :"X-Account-Token", x_account_token)
-    |> add_param(:query, :"remote_user_id", remote_user_id)
-    |> add_optional_params(optional_params, opts)
-    |> Enum.into([])
-    |> (&Connection.request(connection, &1)).()
-    |> evaluate_response([
-      { 200, %MergeATSClient.Model.Application{}}
-    ])
-  end
-
-  @doc """
   Returns an `Application` object with the given `id`.
 
   ## Parameters
@@ -159,8 +122,8 @@ defmodule MergeATSClient.Api.Applications do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Application{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Application.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec applications_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Application.t} | {:error, Tesla.Env.t}
   def applications_retrieve(connection, authorization, x_account_token, id, opts \\ []) do

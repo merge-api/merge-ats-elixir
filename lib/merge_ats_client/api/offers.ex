@@ -33,8 +33,8 @@ defmodule MergeATSClient.Api.Offers do
     - :remote_id (String.t): The API provider's ID for the given object.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedOfferList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedOfferList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec offers_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedOfferList.t} | {:error, Tesla.Env.t}
   def offers_list(connection, authorization, x_account_token, opts \\ []) do
@@ -78,8 +78,8 @@ defmodule MergeATSClient.Api.Offers do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Offer{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Offer.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec offers_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Offer.t} | {:error, Tesla.Env.t}
   def offers_retrieve(connection, authorization, x_account_token, id, opts \\ []) do

@@ -15,9 +15,9 @@ defmodule MergeATSClient.Model.AvailableActions do
   ]
 
   @type t :: %__MODULE__{
-    :"integration" => AccountIntegration,
+    :"integration" => MergeATSClient.Model.AccountIntegration.t,
     :"passthrough_available" => boolean(),
-    :"available_model_operations" => [ModelOperation] | nil
+    :"available_model_operations" => [MergeATSClient.Model.ModelOperation.t] | nil
   }
 end
 

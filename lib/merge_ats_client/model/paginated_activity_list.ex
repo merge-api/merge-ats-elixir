@@ -17,7 +17,7 @@ defmodule MergeATSClient.Model.PaginatedActivityList do
   @type t :: %__MODULE__{
     :"next" => String.t | nil,
     :"previous" => String.t | nil,
-    :"results" => [Activity] | nil
+    :"results" => [MergeATSClient.Model.Activity.t] | nil
   }
 end
 

@@ -30,8 +30,8 @@ defmodule MergeATSClient.Api.Offices do
     - :remote_id (String.t): The API provider's ID for the given object.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedOfficeList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedOfficeList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec offices_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedOfficeList.t} | {:error, Tesla.Env.t}
   def offices_list(connection, authorization, x_account_token, opts \\ []) do
@@ -71,8 +71,8 @@ defmodule MergeATSClient.Api.Offices do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Office{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Office.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec offices_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Office.t} | {:error, Tesla.Env.t}
   def offices_retrieve(connection, authorization, x_account_token, id, opts \\ []) do

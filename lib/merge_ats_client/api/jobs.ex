@@ -29,10 +29,11 @@ defmodule MergeATSClient.Api.Jobs do
     - :modified_before (DateTime.t): If provided, will only return objects modified before this datetime.
     - :page_size (integer()): Number of results to return per page.
     - :remote_id (String.t): The API provider's ID for the given object.
+    - :status (String.t): If provided, will only return jobs with this status. Options: ('OPEN', 'CLOSED', 'DRAFT', 'ARCHIVED', 'PENDING')
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedJobList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedJobList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec jobs_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedJobList.t} | {:error, Tesla.Env.t}
   def jobs_list(connection, authorization, x_account_token, opts \\ []) do
@@ -45,7 +46,8 @@ defmodule MergeATSClient.Api.Jobs do
       :"modified_after" => :query,
       :"modified_before" => :query,
       :"page_size" => :query,
-      :"remote_id" => :query
+      :"remote_id" => :query,
+      :"status" => :query
     }
     %{}
     |> method(:get)
@@ -74,8 +76,8 @@ defmodule MergeATSClient.Api.Jobs do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Job{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Job.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec jobs_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Job.t} | {:error, Tesla.Env.t}
   def jobs_retrieve(connection, authorization, x_account_token, id, opts \\ []) do

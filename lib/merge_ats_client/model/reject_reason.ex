@@ -19,7 +19,7 @@ defmodule MergeATSClient.Model.RejectReason do
     :"id" => String.t | nil,
     :"remote_id" => String.t | nil,
     :"name" => String.t | nil,
-    :"remote_data" => [RemoteData] | nil
+    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
   }
 end
 

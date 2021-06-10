@@ -12,6 +12,44 @@ defmodule MergeATSClient.Api.Scorecards do
 
 
   @doc """
+  Creates a `Scorecard` object with the given values.
+
+  ## Parameters
+
+  - connection (MergeATSClient.Connection): Connection to server
+  - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
+  - x_account_token (String.t): Token identifying the end user.
+  - remote_user_id (String.t): The ID of the RemoteUser deleting the resource. This can be found in the ID field (not remote_id) in the RemoteUser table.
+  - opts (KeywordList): [optional] Optional parameters
+    - :run_async (boolean()): Whether or not third-party updates should be run asynchronously.
+    - :body (ScorecardRequest): 
+  ## Returns
+
+  {:ok, MergeATSClient.Model.Scorecard.t} on success
+  {:error, Tesla.Env.t} on failure
+  """
+  @spec scorecards_create(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Scorecard.t} | {:error, Tesla.Env.t}
+  def scorecards_create(connection, authorization, x_account_token, remote_user_id, opts \\ []) do
+    optional_params = %{
+      :"run_async" => :query,
+      :body => :body
+    }
+    %{}
+    |> method(:post)
+    |> url("/scorecards")
+    |> add_param(:headers, :"Authorization", authorization)
+    |> add_param(:headers, :"X-Account-Token", x_account_token)
+    |> add_param(:query, :"remote_user_id", remote_user_id)
+    |> add_optional_params(optional_params, opts)
+    |> ensure_body()
+    |> Enum.into([])
+    |> (&Connection.request(connection, &1)).()
+    |> evaluate_response([
+      { 201, %MergeATSClient.Model.Scorecard{}}
+    ])
+  end
+
+  @doc """
   Returns a list of `Scorecard` objects.
 
   ## Parameters
@@ -34,8 +72,8 @@ defmodule MergeATSClient.Api.Scorecards do
     - :remote_id (String.t): The API provider's ID for the given object.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedScorecardList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedScorecardList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec scorecards_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedScorecardList.t} | {:error, Tesla.Env.t}
   def scorecards_list(connection, authorization, x_account_token, opts \\ []) do
@@ -80,8 +118,8 @@ defmodule MergeATSClient.Api.Scorecards do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Scorecard{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Scorecard.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec scorecards_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Scorecard.t} | {:error, Tesla.Env.t}
   def scorecards_retrieve(connection, authorization, x_account_token, id, opts \\ []) do

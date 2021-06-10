@@ -21,8 +21,8 @@ defmodule MergeATSClient.Api.LinkToken do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %MergeATSClient.Model.LinkToken{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.LinkToken.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec link_token_create(Tesla.Env.client, MergeATSClient.Model.EndUserDetailsRequest.t, keyword()) :: {:ok, MergeATSClient.Model.LinkToken.t} | {:error, Tesla.Env.t}
   def link_token_create(connection, end_user_details_request, _opts \\ []) do

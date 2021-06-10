@@ -17,7 +17,7 @@ defmodule MergeATSClient.Model.PaginatedAttachmentList do
   @type t :: %__MODULE__{
     :"next" => String.t | nil,
     :"previous" => String.t | nil,
-    :"results" => [Attachment] | nil
+    :"results" => [MergeATSClient.Model.Attachment.t] | nil
   }
 end
 

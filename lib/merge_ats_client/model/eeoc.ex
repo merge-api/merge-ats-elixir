@@ -29,7 +29,7 @@ defmodule MergeATSClient.Model.Eeoc do
     :"gender" => GenderEnum | nil,
     :"veteran_status" => VeteranStatusEnum | nil,
     :"disability_status" => DisabilityStatusEnum | nil,
-    :"remote_data" => [RemoteData] | nil
+    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
   }
 end
 

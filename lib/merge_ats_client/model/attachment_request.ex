@@ -2,39 +2,34 @@
 # https://openapi-generator.tech
 # Do not edit the class manually.
 
-defmodule MergeATSClient.Model.Attachment do
+defmodule MergeATSClient.Model.AttachmentRequest do
   @moduledoc """
   # The Attachment Object ### Description The `Attachment` object is used to represent a attachment for a candidate.  ### Usage Example Fetch from the `LIST Attachments` endpoint and view attachments accessible by a company.
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"id",
     :"remote_id",
     :"file_name",
     :"file_url",
     :"candidate",
-    :"attachment_type",
-    :"remote_data"
+    :"attachment_type"
   ]
 
   @type t :: %__MODULE__{
-    :"id" => String.t | nil,
     :"remote_id" => String.t | nil,
     :"file_name" => String.t | nil,
     :"file_url" => String.t | nil,
     :"candidate" => String.t | nil,
-    :"attachment_type" => AttachmentTypeEnum | nil,
-    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
+    :"attachment_type" => AttachmentTypeEnum | nil
   }
 end
 
-defimpl Poison.Decoder, for: MergeATSClient.Model.Attachment do
+defimpl Poison.Decoder, for: MergeATSClient.Model.AttachmentRequest do
   import MergeATSClient.Deserializer
   def decode(value, options) do
     value
     |> deserialize(:"attachment_type", :struct, MergeATSClient.Model.AttachmentTypeEnum, options)
-    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

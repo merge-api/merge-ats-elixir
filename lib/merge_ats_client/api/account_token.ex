@@ -21,8 +21,8 @@ defmodule MergeATSClient.Api.AccountToken do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %MergeATSClient.Model.AccountToken{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.AccountToken.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec account_token_retrieve(Tesla.Env.client, String.t, keyword()) :: {:ok, MergeATSClient.Model.AccountToken.t} | {:error, Tesla.Env.t}
   def account_token_retrieve(connection, public_token, _opts \\ []) do

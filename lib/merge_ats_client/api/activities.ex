@@ -32,8 +32,8 @@ defmodule MergeATSClient.Api.Activities do
     - :user_id (String.t): If provided, will only return activities done by this user.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedActivityList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedActivityList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec activities_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedActivityList.t} | {:error, Tesla.Env.t}
   def activities_list(connection, authorization, x_account_token, opts \\ []) do
@@ -76,8 +76,8 @@ defmodule MergeATSClient.Api.Activities do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Activity{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Activity.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec activities_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Activity.t} | {:error, Tesla.Env.t}
   def activities_retrieve(connection, authorization, x_account_token, id, opts \\ []) do

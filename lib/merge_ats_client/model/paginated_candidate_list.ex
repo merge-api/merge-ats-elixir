@@ -17,7 +17,7 @@ defmodule MergeATSClient.Model.PaginatedCandidateList do
   @type t :: %__MODULE__{
     :"next" => String.t | nil,
     :"previous" => String.t | nil,
-    :"results" => [Candidate] | nil
+    :"results" => [MergeATSClient.Model.Candidate.t] | nil
   }
 end
 

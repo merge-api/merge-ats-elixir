@@ -35,7 +35,7 @@ defmodule MergeATSClient.Model.Job do
     :"departments" => [String.t] | nil,
     :"offices" => [String.t] | nil,
     :"hiring_managers" => [String.t] | nil,
-    :"remote_data" => [RemoteData] | nil
+    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
   }
 end
 
