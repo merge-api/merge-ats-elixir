@@ -17,7 +17,7 @@ defmodule MergeATSClient.Model.PaginatedRemoteUserList do
   @type t :: %__MODULE__{
     :"next" => String.t | nil,
     :"previous" => String.t | nil,
-    :"results" => [RemoteUser] | nil
+    :"results" => [MergeATSClient.Model.RemoteUser.t] | nil
   }
 end
 

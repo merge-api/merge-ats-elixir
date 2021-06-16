@@ -2,43 +2,38 @@
 # https://openapi-generator.tech
 # Do not edit the class manually.
 
-defmodule MergeATSClient.Model.RemoteUser do
+defmodule MergeATSClient.Model.RemoteUserRequest do
   @moduledoc """
   # The RemoteUser Object ### Description The `RemoteUser` object is used to represent a third party user.  ### Usage Example Fetch from the `LIST RemoteUsers` endpoint to show all users for a third party.
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"id",
     :"remote_id",
     :"first_name",
     :"last_name",
     :"email",
     :"disabled",
     :"remote_created_at",
-    :"access_role",
-    :"remote_data"
+    :"access_role"
   ]
 
   @type t :: %__MODULE__{
-    :"id" => String.t | nil,
     :"remote_id" => String.t | nil,
     :"first_name" => String.t | nil,
     :"last_name" => String.t | nil,
     :"email" => String.t | nil,
     :"disabled" => boolean() | nil,
     :"remote_created_at" => DateTime.t | nil,
-    :"access_role" => AccessRoleEnum | nil,
-    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
+    :"access_role" => AccessRoleEnum | nil
   }
 end
 
-defimpl Poison.Decoder, for: MergeATSClient.Model.RemoteUser do
+defimpl Poison.Decoder, for: MergeATSClient.Model.RemoteUserRequest do
   import MergeATSClient.Deserializer
   def decode(value, options) do
     value
     |> deserialize(:"access_role", :struct, MergeATSClient.Model.AccessRoleEnum, options)
-    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

@@ -33,7 +33,7 @@ defmodule MergeATSClient.Model.Application do
     :"credited_to" => String.t | nil,
     :"current_stage" => String.t | nil,
     :"reject_reason" => String.t | nil,
-    :"remote_data" => [RemoteData] | nil
+    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
   }
 end
 

@@ -30,8 +30,8 @@ defmodule MergeATSClient.Api.Departments do
     - :remote_id (String.t): The API provider's ID for the given object.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedDepartmentList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedDepartmentList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec departments_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedDepartmentList.t} | {:error, Tesla.Env.t}
   def departments_list(connection, authorization, x_account_token, opts \\ []) do
@@ -71,8 +71,8 @@ defmodule MergeATSClient.Api.Departments do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Department{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Department.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec departments_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Department.t} | {:error, Tesla.Env.t}
   def departments_retrieve(connection, authorization, x_account_token, id, opts \\ []) do

@@ -33,6 +33,8 @@ lib/merge_ats_client/model/activity_type_enum.ex
 lib/merge_ats_client/model/application.ex
 lib/merge_ats_client/model/application_request.ex
 lib/merge_ats_client/model/attachment.ex
+lib/merge_ats_client/model/attachment_request.ex
+lib/merge_ats_client/model/attachment_type_enum.ex
 lib/merge_ats_client/model/available_actions.ex
 lib/merge_ats_client/model/candidate.ex
 lib/merge_ats_client/model/candidate_request.ex
@@ -70,8 +72,8 @@ lib/merge_ats_client/model/paginated_reject_reason_list.ex
 lib/merge_ats_client/model/paginated_remote_user_list.ex
 lib/merge_ats_client/model/paginated_scheduled_interview_list.ex
 lib/merge_ats_client/model/paginated_scorecard_list.ex
+lib/merge_ats_client/model/paginated_sync_status_list.ex
 lib/merge_ats_client/model/paginated_tag_list.ex
-lib/merge_ats_client/model/patched_application_request.ex
 lib/merge_ats_client/model/phone_number.ex
 lib/merge_ats_client/model/phone_number_request.ex
 lib/merge_ats_client/model/phone_number_type_enum.ex
@@ -83,10 +85,14 @@ lib/merge_ats_client/model/remote_key.ex
 lib/merge_ats_client/model/remote_key_for_regeneration_request.ex
 lib/merge_ats_client/model/remote_response.ex
 lib/merge_ats_client/model/remote_user.ex
+lib/merge_ats_client/model/remote_user_request.ex
 lib/merge_ats_client/model/scheduled_interview.ex
+lib/merge_ats_client/model/scheduled_interview_request.ex
 lib/merge_ats_client/model/scheduled_interview_status_enum.ex
 lib/merge_ats_client/model/scorecard.ex
+lib/merge_ats_client/model/scorecard_request.ex
 lib/merge_ats_client/model/sync_status.ex
+lib/merge_ats_client/model/sync_status_status_enum.ex
 lib/merge_ats_client/model/tag.ex
 lib/merge_ats_client/model/url.ex
 lib/merge_ats_client/model/url_request.ex

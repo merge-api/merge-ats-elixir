@@ -31,7 +31,7 @@ defmodule MergeATSClient.Model.Offer do
     :"sent_at" => DateTime.t | nil,
     :"start_date" => DateTime.t | nil,
     :"status" => OfferStatusEnum | nil,
-    :"remote_data" => [RemoteData] | nil
+    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
   }
 end
 

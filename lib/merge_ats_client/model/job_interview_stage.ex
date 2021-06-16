@@ -21,7 +21,7 @@ defmodule MergeATSClient.Model.JobInterviewStage do
     :"remote_id" => String.t | nil,
     :"name" => String.t | nil,
     :"job" => String.t | nil,
-    :"remote_data" => [RemoteData] | nil
+    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
   }
 end
 

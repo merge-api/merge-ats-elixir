@@ -11,13 +11,15 @@ defmodule MergeATSClient.Model.ModelOperation do
   defstruct [
     :"model_name",
     :"available_operations",
-    :"required_post_parameters"
+    :"required_post_parameters",
+    :"supported_fields"
   ]
 
   @type t :: %__MODULE__{
     :"model_name" => String.t,
     :"available_operations" => [String.t],
-    :"required_post_parameters" => [String.t]
+    :"required_post_parameters" => [String.t],
+    :"supported_fields" => [String.t]
   }
 end
 

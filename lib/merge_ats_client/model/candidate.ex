@@ -43,13 +43,13 @@ defmodule MergeATSClient.Model.Candidate do
     :"is_private" => boolean() | nil,
     :"can_email" => boolean() | nil,
     :"locations" => [String.t] | nil,
-    :"phone_numbers" => [PhoneNumber] | nil,
-    :"email_addresses" => [EmailAddress] | nil,
-    :"urls" => [Url] | nil,
+    :"phone_numbers" => [MergeATSClient.Model.PhoneNumber.t] | nil,
+    :"email_addresses" => [MergeATSClient.Model.EmailAddress.t] | nil,
+    :"urls" => [MergeATSClient.Model.Url.t] | nil,
     :"tags" => [String.t] | nil,
     :"applications" => [String.t] | nil,
     :"attachments" => [String.t] | nil,
-    :"remote_data" => [RemoteData] | nil
+    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
   }
 end
 

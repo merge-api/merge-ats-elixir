@@ -17,7 +17,7 @@ defmodule MergeATSClient.Model.PaginatedScorecardList do
   @type t :: %__MODULE__{
     :"next" => String.t | nil,
     :"previous" => String.t | nil,
-    :"results" => [Scorecard] | nil
+    :"results" => [MergeATSClient.Model.Scorecard.t] | nil
   }
 end
 

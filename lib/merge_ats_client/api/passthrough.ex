@@ -23,8 +23,8 @@ defmodule MergeATSClient.Api.Passthrough do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %MergeATSClient.Model.RemoteResponse{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.RemoteResponse.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec passthrough_create(Tesla.Env.client, String.t, String.t, MergeATSClient.Model.DataPassthroughRequest.t, keyword()) :: {:ok, MergeATSClient.Model.RemoteResponse.t} | {:error, Tesla.Env.t}
   def passthrough_create(connection, authorization, x_account_token, data_passthrough_request, _opts \\ []) do

@@ -22,8 +22,8 @@ defmodule MergeATSClient.Api.AvailableActions do
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
-  {:ok, %MergeATSClient.Model.AvailableActions{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.AvailableActions.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec available_actions_retrieve(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.AvailableActions.t} | {:error, Tesla.Env.t}
   def available_actions_retrieve(connection, authorization, x_account_token, _opts \\ []) do

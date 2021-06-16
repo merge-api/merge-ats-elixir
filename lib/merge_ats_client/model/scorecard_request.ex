@@ -2,43 +2,38 @@
 # https://openapi-generator.tech
 # Do not edit the class manually.
 
-defmodule MergeATSClient.Model.Scorecard do
+defmodule MergeATSClient.Model.ScorecardRequest do
   @moduledoc """
   # The Scorecard Object ### Description The `Scorecard` object is used to represent a Scorecard for an interview  ### Usage Example Fetch from the `LIST Scorecards` endpoint and filter by `application` to show all scorecard for an applicant.
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"id",
     :"remote_id",
     :"application",
     :"interview",
     :"interviewer",
     :"remote_created_at",
     :"submitted_at",
-    :"overall_recommendation",
-    :"remote_data"
+    :"overall_recommendation"
   ]
 
   @type t :: %__MODULE__{
-    :"id" => String.t | nil,
     :"remote_id" => String.t | nil,
     :"application" => String.t | nil,
     :"interview" => String.t | nil,
     :"interviewer" => String.t | nil,
     :"remote_created_at" => DateTime.t | nil,
     :"submitted_at" => DateTime.t | nil,
-    :"overall_recommendation" => OverallRecommendationEnum | nil,
-    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
+    :"overall_recommendation" => OverallRecommendationEnum | nil
   }
 end
 
-defimpl Poison.Decoder, for: MergeATSClient.Model.Scorecard do
+defimpl Poison.Decoder, for: MergeATSClient.Model.ScorecardRequest do
   import MergeATSClient.Deserializer
   def decode(value, options) do
     value
     |> deserialize(:"overall_recommendation", :struct, MergeATSClient.Model.OverallRecommendationEnum, options)
-    |> deserialize(:"remote_data", :list, MergeATSClient.Model.RemoteData, options)
   end
 end
 

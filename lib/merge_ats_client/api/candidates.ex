@@ -25,8 +25,8 @@ defmodule MergeATSClient.Api.Candidates do
     - :body (CandidateRequest): 
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Candidate{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Candidate.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec candidates_create(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Candidate.t} | {:error, Tesla.Env.t}
   def candidates_create(connection, authorization, x_account_token, remote_user_id, opts \\ []) do
@@ -41,6 +41,7 @@ defmodule MergeATSClient.Api.Candidates do
     |> add_param(:headers, :"X-Account-Token", x_account_token)
     |> add_param(:query, :"remote_user_id", remote_user_id)
     |> add_optional_params(optional_params, opts)
+    |> ensure_body()
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> evaluate_response([
@@ -68,8 +69,8 @@ defmodule MergeATSClient.Api.Candidates do
     - :remote_id (String.t): The API provider's ID for the given object.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedCandidateList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedCandidateList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec candidates_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedCandidateList.t} | {:error, Tesla.Env.t}
   def candidates_list(connection, authorization, x_account_token, opts \\ []) do
@@ -111,8 +112,8 @@ defmodule MergeATSClient.Api.Candidates do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Candidate{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Candidate.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec candidates_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Candidate.t} | {:error, Tesla.Env.t}
   def candidates_retrieve(connection, authorization, x_account_token, id, opts \\ []) do

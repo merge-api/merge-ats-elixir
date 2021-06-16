@@ -2,9 +2,9 @@
 # https://openapi-generator.tech
 # Do not edit the class manually.
 
-defmodule MergeATSClient.Api.RegenerateKey do
+defmodule MergeATSClient.Api.GenerateKey do
   @moduledoc """
-  API calls for all endpoints tagged `RegenerateKey`.
+  API calls for all endpoints tagged `GenerateKey`.
   """
 
   alias MergeATSClient.Connection
@@ -12,26 +12,26 @@ defmodule MergeATSClient.Api.RegenerateKey do
 
 
   @doc """
-  Exchange remote keys.
+  Create a remote key.
 
   ## Parameters
 
   - connection (MergeATSClient.Connection): Connection to server
   - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
-  - remote_key_for_regeneration_request (RemoteKeyForRegenerationRequest): 
+  - generate_remote_key_request (GenerateRemoteKeyRequest): 
   - opts (KeywordList): [optional] Optional parameters
   ## Returns
 
   {:ok, MergeATSClient.Model.RemoteKey.t} on success
   {:error, Tesla.Env.t} on failure
   """
-  @spec regenerate_key_create(Tesla.Env.client, String.t, MergeATSClient.Model.RemoteKeyForRegenerationRequest.t, keyword()) :: {:ok, MergeATSClient.Model.RemoteKey.t} | {:error, Tesla.Env.t}
-  def regenerate_key_create(connection, authorization, remote_key_for_regeneration_request, _opts \\ []) do
+  @spec generate_key_create(Tesla.Env.client, String.t, MergeATSClient.Model.GenerateRemoteKeyRequest.t, keyword()) :: {:ok, MergeATSClient.Model.RemoteKey.t} | {:error, Tesla.Env.t}
+  def generate_key_create(connection, authorization, generate_remote_key_request, _opts \\ []) do
     %{}
     |> method(:post)
-    |> url("/regenerate-key")
+    |> url("/generate-key")
     |> add_param(:headers, :"Authorization", authorization)
-    |> add_param(:body, :body, remote_key_for_regeneration_request)
+    |> add_param(:body, :body, generate_remote_key_request)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> evaluate_response([

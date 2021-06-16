@@ -22,14 +22,16 @@ defmodule MergeATSClient.Model.SyncStatus do
     :"model_id" => String.t,
     :"last_sync_start" => DateTime.t,
     :"next_sync_start" => DateTime.t,
-    :"status" => String.t,
+    :"status" => SyncStatusStatusEnum,
     :"is_initial_sync" => boolean()
   }
 end
 
 defimpl Poison.Decoder, for: MergeATSClient.Model.SyncStatus do
-  def decode(value, _options) do
+  import MergeATSClient.Deserializer
+  def decode(value, options) do
     value
+    |> deserialize(:"status", :struct, MergeATSClient.Model.SyncStatusStatusEnum, options)
   end
 end
 

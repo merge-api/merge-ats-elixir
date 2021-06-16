@@ -17,7 +17,7 @@ defmodule MergeATSClient.Model.PaginatedScheduledInterviewList do
   @type t :: %__MODULE__{
     :"next" => String.t | nil,
     :"previous" => String.t | nil,
-    :"results" => [ScheduledInterview] | nil
+    :"results" => [MergeATSClient.Model.ScheduledInterview.t] | nil
   }
 end
 

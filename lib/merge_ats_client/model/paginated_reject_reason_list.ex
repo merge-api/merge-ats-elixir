@@ -17,7 +17,7 @@ defmodule MergeATSClient.Model.PaginatedRejectReasonList do
   @type t :: %__MODULE__{
     :"next" => String.t | nil,
     :"previous" => String.t | nil,
-    :"results" => [RejectReason] | nil
+    :"results" => [MergeATSClient.Model.RejectReason.t] | nil
   }
 end
 

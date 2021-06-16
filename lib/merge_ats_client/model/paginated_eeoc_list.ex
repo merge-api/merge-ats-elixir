@@ -17,7 +17,7 @@ defmodule MergeATSClient.Model.PaginatedEeocList do
   @type t :: %__MODULE__{
     :"next" => String.t | nil,
     :"previous" => String.t | nil,
-    :"results" => [Eeoc] | nil
+    :"results" => [MergeATSClient.Model.Eeoc.t] | nil
   }
 end
 

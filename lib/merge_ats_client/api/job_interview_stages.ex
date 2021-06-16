@@ -32,8 +32,8 @@ defmodule MergeATSClient.Api.JobInterviewStages do
     - :remote_id (String.t): The API provider's ID for the given object.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedJobInterviewStageList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedJobInterviewStageList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec job_interview_stages_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedJobInterviewStageList.t} | {:error, Tesla.Env.t}
   def job_interview_stages_list(connection, authorization, x_account_token, opts \\ []) do
@@ -76,8 +76,8 @@ defmodule MergeATSClient.Api.JobInterviewStages do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.JobInterviewStage{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.JobInterviewStage.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec job_interview_stages_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.JobInterviewStage.t} | {:error, Tesla.Env.t}
   def job_interview_stages_retrieve(connection, authorization, x_account_token, id, opts \\ []) do

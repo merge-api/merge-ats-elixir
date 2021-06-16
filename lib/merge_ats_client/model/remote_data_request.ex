@@ -2,30 +2,28 @@
 # https://openapi-generator.tech
 # Do not edit the class manually.
 
-defmodule MergeATSClient.Model.PaginatedTagList do
+defmodule MergeATSClient.Model.RemoteDataRequest do
   @moduledoc """
   
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"next",
-    :"previous",
-    :"results"
+    :"path",
+    :"data"
   ]
 
   @type t :: %__MODULE__{
-    :"next" => String.t | nil,
-    :"previous" => String.t | nil,
-    :"results" => [MergeATSClient.Model.Tag.t] | nil
+    :"path" => String.t,
+    :"data" => %{optional(String.t) => AnyType} | nil
   }
 end
 
-defimpl Poison.Decoder, for: MergeATSClient.Model.PaginatedTagList do
+defimpl Poison.Decoder, for: MergeATSClient.Model.RemoteDataRequest do
   import MergeATSClient.Deserializer
   def decode(value, options) do
     value
-    |> deserialize(:"results", :list, MergeATSClient.Model.Tag, options)
+    |> deserialize(:"data", :map, MergeATSClient.Model.AnyType, options)
   end
 end
 

@@ -29,7 +29,7 @@ defmodule MergeATSClient.Model.Activity do
     :"subject" => String.t | nil,
     :"body" => String.t | nil,
     :"visibility" => VisibilityEnum | nil,
-    :"remote_data" => [RemoteData] | nil
+    :"remote_data" => [MergeATSClient.Model.RemoteData.t] | nil
   }
 end
 

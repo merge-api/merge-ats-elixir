@@ -32,8 +32,8 @@ defmodule MergeATSClient.Api.Eeocs do
     - :remote_id (String.t): The API provider's ID for the given object.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.PaginatedEeocList{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.PaginatedEeocList.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec eeocs_list(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.PaginatedEeocList.t} | {:error, Tesla.Env.t}
   def eeocs_list(connection, authorization, x_account_token, opts \\ []) do
@@ -76,8 +76,8 @@ defmodule MergeATSClient.Api.Eeocs do
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
   ## Returns
 
-  {:ok, %MergeATSClient.Model.Eeoc{}} on success
-  {:error, info} on failure
+  {:ok, MergeATSClient.Model.Eeoc.t} on success
+  {:error, Tesla.Env.t} on failure
   """
   @spec eeocs_retrieve(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Eeoc.t} | {:error, Tesla.Env.t}
   def eeocs_retrieve(connection, authorization, x_account_token, id, opts \\ []) do
