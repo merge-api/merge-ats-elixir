@@ -7,10 +7,12 @@ lib/merge_ats_client/api/applications.ex
 lib/merge_ats_client/api/attachments.ex
 lib/merge_ats_client/api/available_actions.ex
 lib/merge_ats_client/api/candidates.ex
+lib/merge_ats_client/api/delete_account.ex
 lib/merge_ats_client/api/departments.ex
 lib/merge_ats_client/api/eeocs.ex
 lib/merge_ats_client/api/generate_key.ex
 lib/merge_ats_client/api/interviews.ex
+lib/merge_ats_client/api/issues.ex
 lib/merge_ats_client/api/job_interview_stages.ex
 lib/merge_ats_client/api/jobs.ex
 lib/merge_ats_client/api/link_token.ex
@@ -48,6 +50,8 @@ lib/merge_ats_client/model/email_address_type_enum.ex
 lib/merge_ats_client/model/end_user_details_request.ex
 lib/merge_ats_client/model/gender_enum.ex
 lib/merge_ats_client/model/generate_remote_key_request.ex
+lib/merge_ats_client/model/issue.ex
+lib/merge_ats_client/model/issue_status_enum.ex
 lib/merge_ats_client/model/job.ex
 lib/merge_ats_client/model/job_interview_stage.ex
 lib/merge_ats_client/model/job_status_enum.ex
@@ -64,6 +68,7 @@ lib/merge_ats_client/model/paginated_attachment_list.ex
 lib/merge_ats_client/model/paginated_candidate_list.ex
 lib/merge_ats_client/model/paginated_department_list.ex
 lib/merge_ats_client/model/paginated_eeoc_list.ex
+lib/merge_ats_client/model/paginated_issue_list.ex
 lib/merge_ats_client/model/paginated_job_interview_stage_list.ex
 lib/merge_ats_client/model/paginated_job_list.ex
 lib/merge_ats_client/model/paginated_offer_list.ex

@@ -19,8 +19,8 @@ defmodule MergeATSClient.Api.Interviews do
   - connection (MergeATSClient.Connection): Connection to server
   - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
-  - remote_user_id (String.t): The ID of the RemoteUser deleting the resource. This can be found in the ID field (not remote_id) in the RemoteUser table.
   - opts (KeywordList): [optional] Optional parameters
+    - :remote_user_id (String.t): The ID of the RemoteUser modifying the resource. This can be found in the ID field (not remote_id) in the RemoteUser table.
     - :run_async (boolean()): Whether or not third-party updates should be run asynchronously.
     - :body (ScheduledInterviewRequest): 
   ## Returns
@@ -28,9 +28,10 @@ defmodule MergeATSClient.Api.Interviews do
   {:ok, MergeATSClient.Model.ScheduledInterview.t} on success
   {:error, Tesla.Env.t} on failure
   """
-  @spec interviews_create(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.ScheduledInterview.t} | {:error, Tesla.Env.t}
-  def interviews_create(connection, authorization, x_account_token, remote_user_id, opts \\ []) do
+  @spec interviews_create(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.ScheduledInterview.t} | {:error, Tesla.Env.t}
+  def interviews_create(connection, authorization, x_account_token, opts \\ []) do
     optional_params = %{
+      :"remote_user_id" => :query,
       :"run_async" => :query,
       :body => :body
     }
@@ -39,7 +40,6 @@ defmodule MergeATSClient.Api.Interviews do
     |> url("/interviews")
     |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
-    |> add_param(:query, :"remote_user_id", remote_user_id)
     |> add_optional_params(optional_params, opts)
     |> ensure_body()
     |> Enum.into([])
