@@ -34,7 +34,6 @@ defimpl Poison.Decoder, for: MergeATSClient.Model.Issue do
   def decode(value, options) do
     value
     |> deserialize(:"status", :struct, MergeATSClient.Model.IssueStatusEnum, options)
-    |> deserialize(:"end_user", :map, MergeATSClient.Model.AnyType, options)
   end
 end
 
