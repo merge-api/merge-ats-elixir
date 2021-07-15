@@ -19,8 +19,8 @@ defmodule MergeATSClient.Api.Candidates do
   - connection (MergeATSClient.Connection): Connection to server
   - authorization (String.t): Should include 'Bearer ' followed by your production API Key.
   - x_account_token (String.t): Token identifying the end user.
-  - remote_user_id (String.t): The ID of the RemoteUser deleting the resource. This can be found in the ID field (not remote_id) in the RemoteUser table.
   - opts (KeywordList): [optional] Optional parameters
+    - :remote_user_id (String.t): The ID of the RemoteUser modifying the resource. This can be found in the ID field (not remote_id) in the RemoteUser table.
     - :run_async (boolean()): Whether or not third-party updates should be run asynchronously.
     - :body (CandidateRequest): 
   ## Returns
@@ -28,9 +28,10 @@ defmodule MergeATSClient.Api.Candidates do
   {:ok, MergeATSClient.Model.Candidate.t} on success
   {:error, Tesla.Env.t} on failure
   """
-  @spec candidates_create(Tesla.Env.client, String.t, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Candidate.t} | {:error, Tesla.Env.t}
-  def candidates_create(connection, authorization, x_account_token, remote_user_id, opts \\ []) do
+  @spec candidates_create(Tesla.Env.client, String.t, String.t, keyword()) :: {:ok, MergeATSClient.Model.Candidate.t} | {:error, Tesla.Env.t}
+  def candidates_create(connection, authorization, x_account_token, opts \\ []) do
     optional_params = %{
+      :"remote_user_id" => :query,
       :"run_async" => :query,
       :body => :body
     }
@@ -39,7 +40,6 @@ defmodule MergeATSClient.Api.Candidates do
     |> url("/candidates")
     |> add_param(:headers, :"Authorization", authorization)
     |> add_param(:headers, :"X-Account-Token", x_account_token)
-    |> add_param(:query, :"remote_user_id", remote_user_id)
     |> add_optional_params(optional_params, opts)
     |> ensure_body()
     |> Enum.into([])
@@ -61,8 +61,11 @@ defmodule MergeATSClient.Api.Candidates do
     - :created_after (DateTime.t): If provided, will only return objects created after this datetime.
     - :created_before (DateTime.t): If provided, will only return objects created before this datetime.
     - :cursor (String.t): The pagination cursor value.
+    - :email_address (String.t): If provided, will only return candidates with this email_address.
     - :expand (String.t): Which relations should be returned in expanded form. Multiple relation names should be comma separated without spaces.
+    - :first_name (String.t): If provided, will only return candidates with this first name.
     - :include_remote_data (boolean()): Whether to include the original data Merge fetched from the third-party to produce these models.
+    - :last_name (String.t): If provided, will only return candidates with this last name.
     - :modified_after (DateTime.t): If provided, will only return objects modified after this datetime.
     - :modified_before (DateTime.t): If provided, will only return objects modified before this datetime.
     - :page_size (integer()): Number of results to return per page.
@@ -78,8 +81,11 @@ defmodule MergeATSClient.Api.Candidates do
       :"created_after" => :query,
       :"created_before" => :query,
       :"cursor" => :query,
+      :"email_address" => :query,
       :"expand" => :query,
+      :"first_name" => :query,
       :"include_remote_data" => :query,
+      :"last_name" => :query,
       :"modified_after" => :query,
       :"modified_before" => :query,
       :"page_size" => :query,
